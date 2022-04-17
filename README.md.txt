@@ -41,12 +41,53 @@ Check ports
     tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      15/sshd
     tcp6       0      0 :::22                   :::*                    LISTEN      15/sshd
 
-## Dataset : Amazon Customer Reviews Dataset from Amazon Customer Reviews Library
 
-Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), 
-Information Retrieval (IR), and 
-Machine Learning (ML)
+##  HttpFS server, the HDFS HTTP Gateway 
 
-    marketplace	customer_id	review_id	product_id	product_parent	product_title	product_category	star_rating	helpful_votes	total_votes	vine	verified_purchase	review_headline	review_body	review_date
-    US	18778586	RDIJS7QYB6XNR	B00EDBY7X8	122952789	Monopoly Junior Board Game	Toys	5	0	0	N	Y	Five Stars	Excellent!!!	2015-08-31
-    US	24769659	R36ED1U38IELG8	B00D7JFOPC	952062646	56 Pieces of Wooden Train Track Compatible with All Major Train Brands	Toys	5	0	0	N	Y	Good quality track at excellent price	Great quality wooden track
+	> hdfs httpfs
+
+
+## Clean the name 
+
+	sudo rm -R /tmp/*
+
+format the namenode
+
+	hdfs namenode -format
+
+
+##Debugging
+
+**Issue1** space issues 
+
+**solution** check free space available
+
+ 	> free -m
+        total        used        free      shared  buff/cache   available
+	Mem:           6265        1407        2788         366        2069        4213
+	Swap:          2048           0        2048
+
+
+
+	> hdfs dfs -df
+	Filesystem             Size  Used  Available  Use%
+	hdfs://localhost:9000     0     0          0  NaN%
+
+**Issue2** safe mode probnlems 
+
+	# hadoop fs -mkdir /exercise/reviews
+	mkdir: Cannot create directory /exercise/reviews. Name node is in safe mode.
+
+**Solution** CHECK THE name node status
+
+	> hdfs dfsadmin -safemode get
+	Safe mode is ON
+
+Leave the safe mode 
+
+	> hdfs dfsadmin -safemode leave
+	Safe mode is OFF
+
+Enter in SAFE MODE:
+
+	> hdfs dfsadmin -safemode enter
