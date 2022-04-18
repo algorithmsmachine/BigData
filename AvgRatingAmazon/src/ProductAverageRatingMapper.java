@@ -25,7 +25,7 @@ public class ProductAverageRatingMapper extends Mapper<LongWritable, Text, Text,
             }
 
         } catch (Exception e) {
-            System.out.println("Something went wrong in Mapper Task: ");
+            System.out.println("Exception in Mapper Task: ");
             e.printStackTrace();
         }
 

@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="hadoop-common-3.2.1-tests">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-common-3.2.1-tests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-common-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-kms-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-app-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-common-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-core-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-hs-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-nfs-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-examples-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-uploader-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-shuffle-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-nativetask-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-jobclient-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-jobclient-3.2.1-tests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mapreducelib/hadoop-mapreduce-client-hs-plugins-3.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

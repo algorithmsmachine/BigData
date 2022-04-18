@@ -24,7 +24,7 @@ public class ProductAverageRatingReducer extends Reducer<Text, CountAverageTuple
             context.write(key, result);
 
         } catch (Exception e) {
-            System.out.println("Something went wrong in Reducer Task: ");
+            System.out.println("Exception in Reducer Task: ");
             e.printStackTrace();
         }
     }
