@@ -91,3 +91,55 @@ Leave the safe mode
 Enter in SAFE MODE:
 
 	> hdfs dfsadmin -safemode enter
+
+**Issue 3** Corrupted spaces 
+
+**solution** For corrupted blocks, you can have a look at output of this command:
+
+	hdfs fsck -list-corruptfileblocks
+
+And try to delete corrupted blocks using:
+
+	hdfs fsck / -delete
+
+**Issue 4** IO Exception in put 
+
+	._COPYING_ could only be written to 0 of the 1 minReplication nodes. There are 0 datanode(s) running and 0 node(s) are excluded in this operation.
+
+**solution** check the configuration of master and slave nmodes 
+
+	> cat /etc/hosts
+
+	127.0.0.1       localhost
+	::1     localhost ip6-localhost ip6-loopback
+	fe00::0 ip6-localnet
+	ff00::0 ip6-mcastprefix
+	ff02::1 ip6-allnodes
+	ff02::2 ip6-allrouters
+	172.17.0.2      2e2f6c19ed60
+
+If none found than stop and start data nodes
+	> /opt/hadoop-3.2.1/sbin/stop-all.sh
+
+	Stopping namenodes on [localhost]
+	Stopping datanodes
+	Stopping secondary namenodes [2e2f6c19ed60]
+	Stopping nodemanagers
+	Stopping resourcemanager
+
+	> /opt/hadoop-3.2.1/sbin/start-dfs.sh
+
+	Starting namenodes on [localhost]
+	Starting datanodes
+	Starting secondary namenodes [2e2f6c19ed60]
+
+Alternayively you can start data node using hdfs 
+
+	> hdfs --daemon start datanode 
+
+**Issue 5** Incom[atiable clusyter Id 
+
+	2022-04-17 18:00:33,442 WARN common.Storage: Failed to add storage directory [DISK]file:/tmp/hadoop-root/dfs/data
+java.io.IOException: Incompatible clusterIDs in /tmp/hadoop-root/dfs/data: namenode clusterID = CID-01feef3c-4682-41cb-a90c-7e0f53eabffb; datanode clusterID = CID-c806df05-af30-4945-9c97-d14c0cda1ab3
+
+**solution** 
