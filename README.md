@@ -58,7 +58,11 @@ format the namenode
 
 ## IDE setup for a hadoop project 
 
-![project setup] (screenshots/project_ss.png)
+![project setup](screenshots/project_ss.png)
+
+## IDE to docker container hosting haddop 
+
+ 	docker cp .\IndexLocator\out\artifacts\IndexLocator_jar\IndexLocator.jar bda:/hadoop-data
 
 ## Debugging
 
