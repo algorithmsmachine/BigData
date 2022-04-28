@@ -59,21 +59,27 @@ format the namenode
 ## IDE setup for a hadoop project 
 
 Project setup
+
 ![project setup](screenshots/project_ss.png)
 
 modules 
+
 ![modules](screenshots/modules_ss.png)
 
 libraries 
+
 ![libraries](screenshots/libraries_import_ss.png)
 
-artifacts 
-![artifacts](screenshots/jdk.png)
+JDK
 
-JDK 
-![jdk](screenshots/artifact_jar_main_ss.png)
+![jdk](screenshots/jdk.png)
+
+artifacts
+
+![artifacts](screenshots/artifact_jar_main_ss.png)
 
 output jar 
+
 ![jar](screenshots/out_jar_ss.png)
 
 ## IDE to docker container hosting haddop 
