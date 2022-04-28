@@ -75,6 +75,36 @@ To copy the results to local disk
     copyToLocal: `_SUCCESS': File exists
     copyToLocal: `part-r-00000': File exists
 
+## Output
+
+3 columns : product_id, total number of reviews of this product, the average rate of this product
+
+    0141186178	1	5.0
+    0303532572	2	4.5
+    043964383X	1	5.0
+    0511189877	49	4.387755
+    0528881469	34	3.1470587
+
+## Review rating all books 
+
+sample input and output  argument 
+
+s3://bigdataaltanai/reviews/
+s3://bigdataaltanai/opreviews/
+
+inputs 
+
+s3://amazon-reviews-pds/tsv/amazon_reviews_us_Books_v1_00.tsv.gz
+s3://amazon-reviews-pds/tsv/amazon_reviews_us_Books_v1_01.tsv.gz
+s3://amazon-reviews-pds/tsv/amazon_reviews_us_Books_v1_02.tsv.gz
+
+
+combine these by using wildcard and also give an output 
+
+
+s3://amazon-reviews-pds/tsv/amazon_reviews_us_Books_v1_0*.tsv.gz
+s3://bigdataaltanai/output_book_reviews/
+
 **Ref**
 - https://s3.amazonaws.com/amazon-reviews-pds/readme.html
 - 

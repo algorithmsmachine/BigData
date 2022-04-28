@@ -12,7 +12,11 @@ public class ProductAverageRatingMain {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException
     {
         try {
-            long startTime = System.currentTimeMillis();
+            if (args.length != 2) {
+                System.out.printf("Usage: ProductAverageRatingMain <input dir> <output dir>\n");
+                System.exit(-1);
+            }
+
             Job job = Job.getInstance();
             job.setJarByClass(ProductAverageRatingMain.class);
 
@@ -32,9 +36,7 @@ public class ProductAverageRatingMain {
             job.setOutputValueClass(CountAverageTuple.class);
 
             job.waitForCompletion(true);
-            long endTime = System.currentTimeMillis();
-            System.out.println("Time taken in milliseconds : " + (endTime - startTime));
-            System.out.println("Time taken in seconds : " + (endTime - startTime)/1000);
+
 
         } catch (Exception e) {
             System.out.println("Something went wrong in main class: ");

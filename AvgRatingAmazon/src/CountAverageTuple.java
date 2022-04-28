@@ -4,6 +4,8 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+// External class(CountAverageTuple) as value object type for keys.
+// this class implements the Writable interface tocreate serialized datatypes.
 public class CountAverageTuple implements Writable {
 
     private Long count;

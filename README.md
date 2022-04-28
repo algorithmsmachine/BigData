@@ -56,7 +56,11 @@ format the namenode
 	hdfs namenode -format
 
 
-##Debugging
+## IDE setup for a hadoop project 
+
+![project setup] (screenshots/project_ss.png)
+
+## Debugging
 
 **Issue1** space issues 
 
