@@ -72,7 +72,7 @@ libraries
 
 JDK
 
-![jdk](screenshots/jdk.png)
+![jdk](screenshots/jdk_ss.png)
 
 artifacts
 
