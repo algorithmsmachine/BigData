@@ -1,3 +1,5 @@
+package stubs;
+
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -11,7 +13,7 @@ public class ProcessLogs {
   public static void main(String[] args) throws Exception {
 
     if (args.length != 2) {
-      System.out.printf("Usage: ProcessLogs <input dir> <output dir>\n");
+      System.out.printf("Usage: stubs.ProcessLogs <input dir> <output dir>\n");
       System.exit(-1);
     }
 
@@ -37,11 +39,19 @@ public class ProcessLogs {
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
 
-    /* 
-     * TODO: implement (reducers and partitioner)
+    /*
+     * Set up the partitioner. Specify 12 reducers - one for each
+     * month of the year. The partitioner class must have a
+     * getPartition method that returns a number between 0 and 11.
+     * This number will be used to assign the intermediate output
+     * to one of the reducers.
      */
-    
+    job.setNumReduceTasks(12);
 
+    /*
+     * Specify the partitioner class.
+     */
+    job.setPartitionerClass(MonthPartitioner.class);
     
     boolean success = job.waitForCompletion(true);
     System.exit(success ? 0 : 1);

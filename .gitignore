@@ -1,3 +1,7 @@
 */out
 .idea
 */.idea
+*.class
+*/target
+*.csv
+*.log

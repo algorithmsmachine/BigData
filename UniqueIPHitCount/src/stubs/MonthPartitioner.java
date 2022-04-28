@@ -1,3 +1,5 @@
+package stubs;
+
 import java.util.HashMap;
 
 import org.apache.hadoop.io.Text;
@@ -17,11 +19,21 @@ public class MonthPartitioner<K2, V2> extends Partitioner<Text, Text> implements
   @Override
   public void setConf(Configuration configuration) {
      /*
-     * Add the months to a HashMap.
+     * Add the months to a HashMap. this sets up the correspondence.
      */
-    /*
-     * TODO implement 
-     */
+    this.configuration = configuration;
+    months.put("Jan", 0);
+    months.put("Feb", 1);
+    months.put("Mar", 2);
+    months.put("Apr", 3);
+    months.put("May", 4);
+    months.put("Jun", 5);
+    months.put("Jul", 6);
+    months.put("Aug", 7);
+    months.put("Sep", 8);
+    months.put("Oct", 9);
+    months.put("Nov", 10);
+    months.put("Dec", 11);
   }
 
   /**
@@ -33,10 +45,9 @@ public class MonthPartitioner<K2, V2> extends Partitioner<Text, Text> implements
   }
 
   /**
-   * You must implement the getPartition method for a partitioner class.
-   * This method receives the three-letter abbreviation for the month
+   *  getPartition method for a partitioner class receives the three-letter abbreviation for the month
    * as its value. (It is the output value from the mapper.)
-   * It should return an integer representation of the month.
+   * It returns an integer representation of the month.
    * Note that January is represented as 0 rather than 1.
    * 
    * For this partitioner to work, the job configuration must have been
@@ -44,11 +55,10 @@ public class MonthPartitioner<K2, V2> extends Partitioner<Text, Text> implements
    */
   public int getPartition(Text key, Text value, int numReduceTasks) {
     /*
-     * TODO implement
      * Change the return 0 statement below to return the number of the month
      * represented by the value parameter.  Use to months hashtable to map
      * the string to the month number: months.get(value.toString()) and cast it to int.
      */
-     return 0;
+    return (int) (months.get(value.toString()));
   }
 }

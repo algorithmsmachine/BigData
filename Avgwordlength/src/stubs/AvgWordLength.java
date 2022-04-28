@@ -36,10 +36,6 @@ public class AvgWordLength {
         job.setJarByClass(AvgWordLength.class);
 
 
-
-        /*
-         * TODO implement
-         */
         /*
          * Specify the paths to the input and output data based on the command-line arguments
          */

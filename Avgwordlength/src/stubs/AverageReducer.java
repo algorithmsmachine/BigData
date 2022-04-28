@@ -13,9 +13,6 @@ public class AverageReducer extends Reducer<Text, IntWritable, Text, DoubleWrita
     public void reduce(Text key, Iterable<IntWritable> values, Context context)
             throws IOException, InterruptedException {
 
-        /*
-         * TODO implement
-         */
         int wordCount = 0;
         for (IntWritable value : values) {
             wordCount += value.get();
