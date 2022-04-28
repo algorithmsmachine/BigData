@@ -58,11 +58,52 @@ format the namenode
 
 ## IDE setup for a hadoop project 
 
+Project setup
 ![project setup](screenshots/project_ss.png)
+
+modules 
+![modules](screenshots/modules_ss.png)
+
+libraries 
+![libraries](screenshots/libraries_import_ss.png)
+
+artifacts 
+![artifacts](screenshots/jdk.png)
+
+JDK 
+![jdk](screenshots/artifact_jar_main_ss.png)
+
+output jar 
+![jar](screenshots/out_jar_ss.png)
 
 ## IDE to docker container hosting haddop 
 
  	docker cp .\IndexLocator\out\artifacts\IndexLocator_jar\IndexLocator.jar bda:/hadoop-data
+
+## Elastic MapReduce (EMR)
+
+ 1: Develop a MapReduce Java Program
+
+ 2 : AWs account creation 
+
+ 3 : Upload the JAR and input files to Amazon S3
+
+ 4: Run an elastic MapReduce job
+
+- Go to the Elastic MapReduce (EMR) service in AWS. From the control panel there, click the “Create cluster” button.
+- on the first configuration screen, click “Go to advanced options”
+- On the “Step 1: Software and Steps” page (“Software Configuration”)
+	- Select Release “emr-6.5.0”. Leave all the default services checked
+	- Under “Steps (optional)”, do the following things
+		Check “Cluster auto-terminates” for the item “After last step completes”.
+		Choose “Step type” as “Custom JAR” – provide name , location and arguments from s3
+	- after being done configuring the Custom JAR, click “Add”.
+- On the “Step 2: Hardware” page (Hardware Configuration),
+	- instance m5.xlarge is one of the Amazon EC2 instances
+	- select master node , worker ( core ) nodes and atsks 
+- on "Step 3: General Cluster Settings” page (General Options), give your cluster a name.
+- On the “Step 4: Security” page (Security Options , give a key pair
+
 
 ## Debugging
 
