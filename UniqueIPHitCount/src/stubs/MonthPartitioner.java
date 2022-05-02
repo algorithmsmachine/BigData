@@ -48,10 +48,8 @@ public class MonthPartitioner<K2, V2> extends Partitioner<Text, Text> implements
    *  getPartition method for a partitioner class receives the three-letter abbreviation for the month
    * as its value. (It is the output value from the mapper.)
    * It returns an integer representation of the month.
-   * Note that January is represented as 0 rather than 1.
    * 
-   * For this partitioner to work, the job configuration must have been
-   * set so that there are exactly 12 reducers.
+   * job configuration has  12 reducers.
    */
   public int getPartition(Text key, Text value, int numReduceTasks) {
     /*
