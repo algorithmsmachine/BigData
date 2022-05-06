@@ -1,4 +1,4 @@
-# average Length in shakespeare 
+# Average Length in shakespeare 
 
 Create a folder on HDFS for organizing and copy files
 
@@ -16,6 +16,11 @@ download a file to work with on the local filesystem
     hadoop fs -get /exercise/shakespeare/poems shakepoems.txt
     cat shakepoems.txt
 
+## Run with file system on windows 
+
+Arguments for Run configuration in IDE
+    
+    C:\Users\abisht\Downloads\shakespeare C:\Users\abisht\BigData\Avgwordlength\output
 
 ## Same with weblog 
 
@@ -60,3 +65,14 @@ download a file to work with on the local filesystem
     WRONG_REDUCE=0
     File Output Format Counters
     Bytes Written=0
+
+## Debugging and help 
+
+**Issue1** java.lang.IllegalArgumentException: Wrong FS: s3:// expected hdfs://
+
+    Exception in thread "main" java.lang.IllegalArgumentException: Wrong FS: s3://bigdataaltanai/output, expected: hdfs://ip-172-31-13-136.ec2.internal:8020
+    at org.apache.hadoop.fs.FileSystem.checkPath(FileSystem.java:737)
+
+**solution** 
+
+    s3-dist-cp --src=s3://s3distcp-source/input-data --dest=hdfs:///output-folder1.
