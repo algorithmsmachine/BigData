@@ -1,4 +1,10 @@
-# WebLog 
+# Log Analysis 
+
+## FS Log 
+
+     hadoop fs -put  FS_logs  /fslogs
+
+## WebLog 
 
     hadoop fs -mkdir  /loudacre
     hadoop fs -put weblogs  /loudacre/   
@@ -6,6 +12,22 @@
 See some of the files 
 
     hadoop  fs  -cat  /loudacre/weblogs/2014-03-15.log    
+
+check 
+
+    (base) C:\Users\abisht>hdfs dfs -ls /loudacre
+    Found 1 items
+    drwxr-xr-x   - abisht supergroup          0 2022-05-05 23:20 /loudacre/weblogs
+    
+    (base) C:\Users\abisht>hdfs dfs -ls /loudacre/weblogs
+    Found 182 items
+    -rw-r--r--   1 abisht supergroup     521343 2022-05-05 23:20 /loudacre/weblogs/2013-09-15.log
+    -rw-r--r--   1 abisht supergroup     484079 2022-05-05 23:20 /loudacre/weblogs/2013-09-16.log
+    -rw-r--r--   1 abisht supergroup     527399 2022-05-05 23:20 /loudacre/weblogs/2013-09-17.log
+    ......
+
+
+
 
 ## Change the java JDK form terminal from anaconda 
 
@@ -49,12 +71,21 @@ After
     hadoop namenode -format
     hdfs datanode -format
 
-**Issue 4** The current user is not in the 'docker-users' group. Add yourself to the 'docker-users' group and then log out and back in to Windows.
 
-**Solution** To add a user to docker group ( needs admin permission in terminal )
+**Issue 5** RDD collect throws IPPub data rate exceeded error
 
-    net localgroup docker-users abisht /ADD
+    IOPub data rate exceeded.
+    The notebook server will temporarily stop sending output
+    to the client in order to avoid crashing it.
+    To change this limit, set the config variable
+    `--NotebookApp.iopub_data_rate_limit`.
+    
+    Current values:
+    NotebookApp.iopub_data_rate_limit=1000000.0 (bytes/sec)
+    NotebookApp.rate_limit_window=3.0 (secs)
 
+
+**Solution**
 
 
 
