@@ -47,3 +47,4 @@ topEndpoints = (access_logs
                 .reduceByKey(lambda a, b : a + b)
                 .takeOrdered(10, lambda s: -1 * s[1]))
 print ("Top Endpoints: %s" % (topEndpoints))
+

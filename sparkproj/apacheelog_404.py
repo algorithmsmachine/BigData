@@ -536,14 +536,10 @@ Test.assertTrue(badRecords.is_cached, 'incorrect badRecords.is_cached')
 
 # In[120]:
 
-# TODO: Replace <FILL IN> with appropriate code
-
 badEndpoints = badRecords.map(lambda x: x.endpoint)
-
 badUniqueEndpoints = badEndpoints.distinct()
-
 badUniqueEndpointsPick40 = badUniqueEndpoints.take(40)
-print '404 URLS: %s' % badUniqueEndpointsPick40
+print('404 URLS: %s' % badUniqueEndpointsPick40)
 
 
 # In[121]:
@@ -560,10 +556,7 @@ Test.assertEquals(len(badUniqueEndpointsSet40), 40, 'badUniqueEndpointsPick40 no
 
 # In[126]:
 
-# TODO: Replace <FILL IN> with appropriate code
-
 badEndpointsCountPairTuple = badRecords.map(lambda x: (x.endpoint,1))
-
 badEndpointsSum = badEndpointsCountPairTuple.reduceByKey(lambda a,b: a+b)
 print('Top twenty %s' % badEndpointsSum)
 badEndpointsTop20 = badEndpointsSum.takeOrdered(20, key= lambda x: -x[1])
@@ -612,7 +605,7 @@ errDateSum = errDateCountPairTuple.reduceByKey(lambda a,b: a+b)
 errDateSorted = (errDateSum)
 #print errDateSorted
 errByDate = errDateSorted.takeOrdered(30)
-print '404 Errors by day: %s' % errByDate
+print('404 Errors by day: %s' % errByDate)
 errDateSorted.cache()
 
 
@@ -627,23 +620,18 @@ Test.assertTrue(errDateSorted.is_cached, 'incorrect errDateSorted.is_cached')
 # ####Using the results from the previous exercise, use `matplotlib` to plot a "Line" or "Bar" graph of the 404 response codes by day.
 
 # In[147]:
-
-# TODO: Replace <FILL IN> with appropriate code
-
 daysWithErrors404 = errDateSorted.map(lambda x: x[0]).takeOrdered(30)
 errors404ByDay = [x[1] for x in errDateSorted.takeOrdered(30, key= lambda x: x[0])]
-print errors404ByDay
+print(errors404ByDay)
 
 
 # In[148]:
-
 # TEST Visualizing the 404 Response Codes by Day (4f)
 Test.assertEquals(daysWithErrors404, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22], 'incorrect daysWithErrors404')
 Test.assertEquals(errors404ByDay, [243, 303, 346, 234, 372, 532, 381, 279, 314, 263, 195, 216, 287, 326, 258, 269, 255, 207, 312, 305, 288], 'incorrect errors404ByDay')
 
 
 # In[149]:
-
 fig = plt.figure(figsize=(8,4.2), facecolor='white', edgecolor='white')
 plt.axis([0, max(daysWithErrors404), 0, max(errors404ByDay)])
 plt.grid(b=True, which='major', axis='y')
@@ -661,7 +649,7 @@ pass
 # TODO: Replace <FILL IN> with appropriate code
 
 topErrDate = errDateSorted.takeOrdered(5, key= lambda x: -x[1])
-print 'Top Five dates for 404 requests: %s' % topErrDate
+print('Top Five dates for 404 requests: %s' % topErrDate)
 
 
 # In[151]:
@@ -674,17 +662,11 @@ Test.assertEquals(topErrDate, [(7, 532), (8, 381), (6, 372), (4, 346), (15, 326)
 # ####Using the RDD `badRecords` you cached in the part (4a) and by hour of the day and in decreasing order, create an RDD containing how many requests had a 404 return code for each hour of the day. Cache the resulting RDD hourRecordsSorted and print that as a list.
 
 # In[157]:
-
-# TODO: Replace <FILL IN> with appropriate code
-
 hourCountPairTuple = badRecords.map(lambda x: (x.date_time.hour,1))
-
 hourRecordsSum = hourCountPairTuple.reduceByKey(lambda a,b: a+b)
-
 hourRecordsSorted = hourRecordsSum
-
 errHourList = hourRecordsSorted.takeOrdered(30)
-print 'Top hours for 404 requests: %s' % errHourList
+print('Top hours for 404 requests: %s' % errHourList)
 hourRecordsSorted.cache()
 
 
