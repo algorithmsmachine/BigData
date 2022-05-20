@@ -82,9 +82,115 @@ output jar
 
 ![jar](screenshots/out_jar_ss.png)
 
-## IDE to docker container hosting haddop 
+## Configuration for hadoop hdfs on win 10
 
- 	docker cp .\IndexLocator\out\artifacts\IndexLocator_jar\IndexLocator.jar bda:/hadoop-data
+Hadoop configurations involves Core, YARN, MapReduce, HDFS configurations.
+Note win10 has a bug on posix in hadoop source code
+https://issues.apache.org/jira/browse/HDFS-14890
+
+**core-site.xml**
+
+	> notepad .\etc\hadoop\core-site.xml
+	
+	<?xml version="1.0" encoding="UTF-8"?>
+	<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+	
+	<configuration>
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://localhost:9000</value>
+	 </property>
+	</configuration>
+
+**hdfs-site.xml**
+
+Before adding teh conf make sure you have the folder 
+
+	>ls .\big-data\data\dfs
+		Directory: C:\Users\abisht\big-data\data\dfs
+	Mode                 LastWriteTime         Length Name
+	----                 -------------         ------ ----
+	d-----          5/3/2022   7:31 AM                data
+	d-----          5/3/2022   7:30 AM                namespace_logs
+
+Then edit the conf file for hdfs
+
+	<configuration>
+	   <property>
+		 <name>dfs.replication</name>
+		 <value>1</value>
+	   </property>
+	   <property>
+		 <name>dfs.namenode.name.dir</name>
+		 <value>file:///C:/Users/abisht/big-data/data/dfs/namespace_logs</value>
+	   </property>
+	   <property>
+		 <name>dfs.datanode.data.dir</name>
+		 <value>file:///C:/USers/abisht/big-data/data/dfs/data</value>
+	   </property>
+	</configuration>
+
+**mapred-site.xml**
+
+Configure MapReduce
+
+	<configuration>
+		<property>
+			<name>mapreduce.framework.name</name>
+			<value>yarn</value>
+		</property>
+		<property> 
+			<name>mapreduce.application.classpath</name>
+			<value>%HADOOP_HOME%/share/hadoop/mapreduce/*,%HADOOP_HOME%/share/hadoop/mapreduce/lib/*,%HADOOP_HOME%/share/hadoop/common/*,%HADOOP_HOME%/share/hadoop/common/lib/*,%HADOOP_HOME%/share/hadoop/yarn/*,%HADOOP_HOME%/share/hadoop/yarn/lib/*,%HADOOP_HOME%/share/hadoop/hdfs/*,%HADOOP_HOME%/share/hadoop/hdfs/lib/*</value>
+		</property>
+	</configuration>
+
+**yarn-site.xml**
+
+	<configuration>
+	 <property>
+			<name>yarn.nodemanager.aux-services</name>
+			<value>mapreduce_shuffle</value>
+		</property>
+		<property>
+			<name>yarn.nodemanager.env-whitelist</name>
+			<value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+		</property>
+	</configuration>
+
+
+## IDE to docker container hosting hadoop 
+
+Copying jar to docker 
+
+ 	docker cp IndexLocator.jar bda:/hadoop-data
+
+Formatting Namenode
+
+	hadoop namenode -format
+
+Launching Hadoop
+
+	start-all.cmd
+
+This will open 4 new cmd windows running 4 different Daemons of hadoop:-
+* Namenode
+* Datanode
+* Resourcemanager
+* Nodemanager
+
+Running Hadoop
+
+	hadoop jar <name of jar> <input folder created by hdfs arg1> <output folder agr2>
+
+## Web UIs
+
+Namenode localhost:50070
+
+Resourcemanger localhost:8088
+
+Datanode http://localhost:9864/datanode.html
+
 
 ## Elastic MapReduce (EMR)
 
@@ -110,6 +216,14 @@ output jar
 - on "Step 3: General Cluster Settings” page (General Options), give your cluster a name.
 - On the “Step 4: Security” page (Security Options , give a key pair
 
+## References 
+
+- https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
+- https://kontext.tech/article/377/latest-hadoop-321-installation-on-windows-10-step-by-step-guide 
+- https://kontext.tech/article/379/fix-for-hadoop-321-namenode-format-issue-on-windows-10
+- https://stackoverflow.com/questions/44427653/hadoop-error-starting-resourcemanager-and-nodemanager
+- https://medium.com/analytics-vidhya/hadoop-how-to-install-in-5-steps-in-windows-10-61b0e67342f8
+- https://github.com/cdarlint/winutils/tree/master/hadoop-3.2.1/bin
 
 ## Debugging
 
@@ -188,13 +302,14 @@ If none found than stop and start data nodes
 	Starting datanodes
 	Starting secondary namenodes [2e2f6c19ed60]
 
-Alternayively you can start data node using hdfs 
+Alternatively you can start data node using hdfs 
 
 	> hdfs --daemon start datanode 
 
-**Issue 5** Incom[atiable clusyter Id 
+**Issue 5** Incompatiable cluster Id 
 
 	2022-04-17 18:00:33,442 WARN common.Storage: Failed to add storage directory [DISK]file:/tmp/hadoop-root/dfs/data
 java.io.IOException: Incompatible clusterIDs in /tmp/hadoop-root/dfs/data: namenode clusterID = CID-01feef3c-4682-41cb-a90c-7e0f53eabffb; datanode clusterID = CID-c806df05-af30-4945-9c97-d14c0cda1ab3
 
-**solution** 
+**solution**
+
