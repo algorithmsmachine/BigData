@@ -7,6 +7,9 @@ Logs can be used for monitoring servers, improving business and customer intelli
 
 	cd "C:\Users\abisht\OneDrive - Seattle University\Documents\GitHub\BigData\sparkproj"
 
+
+	C:\Users\abisht\Anaconda3\python.exe
+
 ## pyspark 
 
 Download tar from https://www.apache.org/dyn/closer.lua/spark/spark-3.2.1
@@ -22,13 +25,13 @@ spark hadoop env varaibles
 ![spark hadoop env varaibles](hadoop_spack.PNG)
 
 
-### RDD 
+### RDD resilient distributed dataset
+
+Collection of elements partitioned across the nodes of the cluster that can be operated on in parallel
 
 RDD from colections 
 
-	myData = [“Alice”, “Carlos”, “Frank”, “Barbara”]
-	myRdd = sc.parallelize(myData)
-	myRdd. take(2)
+	
 
 ## Debugging help 
 
